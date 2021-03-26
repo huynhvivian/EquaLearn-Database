@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+td {
+  border: 2px DarkGreen;
+  border-style: dotted solid;
+  border-collapse: collapse;
+  font-size: 16px;
+  padding: 10px;
+  font-family: arial;
+}
+th, table {
+  border: 3px solid DarkGreen;
+  border-collapse: collapse;
+  font-size: 16px;
+  padding: 10px;
+  font-family: arial;
+}
+tr:nth-child(odd) {
+  background-color: #e0ffcc;
+}
+.button1 {
+  border: none;
+  background-color:#44aa00;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+  font-family: arial;
+  margin: 4px 2px;
+  border-radius: 4px
+}
+.button2 {
+  float:right
+}
+.cancelbutton{
+  border: none;
+  color: white;
+  background-color:#44aa00;
+  text-align: center;
+  font-size: 16px;
+  padding: 5px;
+  font-family: arial;
+  border-radius: 4px;
+}
+
+
+</style>
+</head>
+<body style = "background-color:#f8f9f9;">
+
+<button class = "cancelbutton">Log Out</button>
+<img src = "equalearnlogo.png" alt = "EquaLearn Logo" width = "132" height = "102" style = "float:right">
+
+
+<br>
+<h1 style = "text-align:center;color:DarkGreen;font-family:arial;"> Volunteer Dashboard </h1>
+
+<h5 style = "padding:5px;background-color:#44aa00;text-align:right;color:white;font-size:16px;font-family:arial;">Current Hours: x </h5>
+
+
+
+<div><button class = "button1" style = "button">Add Hours</button>
+<button class = "button1" style = "button;float:right">Sign Up</button>
+<button class = "button1" style = "button;float:right">Edit Preferences</button></div>
+<table style = "width:100%">
+  <tr>
+    <th>Student</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Status</th>
+    <th>Cancel?</th>
+  </tr>
+  <tr>
+    <td><center>John Doe</center></td>
+    <td><center>March 28 2021</center></td>
+    <td><center>10:00-12:00</center></td>
+    <td><center>Online</center></td>
+    <td><center>In Future</center></td>
+    <td><center><button class = "cancelbutton">Cancel Meeting</button></center></td>
+  </tr>
+  <tr>
+    <td><center>Bob Smith</center></td>
+    <td><center>March 25 2021</center></td>
+    <td><center>3:00-5:00</center></td>
+    <td><center>Online</center></td>
+    <td><center>Unverified</center></td>
+    <td><center><button class = "cancelbutton">Cancel Meeting</button></center></td>
+  </tr>
+  <tr>
+    <td><center>Jane Doe</center></td>
+    <td><center>March 22 2021</center></td>
+    <td><center>1:00-2:00</center></td>
+    <td><center>Calgary Public Library</center></td>
+    <td><center>Verified</center></td>
+    <td><center><button class = "cancelbutton">Cancel Meeting</button></center></td>
+  </tr>
+
+</table>
+</body>
+</html>
