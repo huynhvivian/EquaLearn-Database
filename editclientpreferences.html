@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+td {
+  border: 2px DarkGreen;
+  border-style: dotted solid;
+  border-collapse: collapse;
+  font-size: 16px;
+  padding: 10px;
+  font-family: arial;
+}
+th, table {
+  border: 3px solid DarkGreen;
+  border-collapse: collapse;
+  font-size: 16px;
+  padding: 10px;
+  font-family: arial;
+  text-align: center;
+}
+tr:nth-child(odd) {
+  background-color: #e0ffcc;
+}
+.button1 {
+  border: none;
+  background-color:#44aa00;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+  font-family: arial;
+  margin: 4px 2px;
+  border-radius: 4px
+}
+.cancelbutton{
+  border: none;
+  color: white;
+  background-color:#44aa00;
+  text-align: center;
+  font-size: 16px;
+  padding: 5px;
+  font-family: arial;
+  border-radius: 4px;
+}
+
+
+</style>
+</head>
+<body style = "background-color:#f8f9f9;">
+
+<button class = "cancelbutton">Log Out</button>
+<img src = "equalearnlogo.png" alt = "EquaLearn Logo" width = "132" height = "102" style = "float:right">
+
+
+<br>
+<h1 style = "text-align:center;color:DarkGreen;font-family:arial;"> Client Dashboard </h1>
+
+<h5 style = "padding:15px;background-color:#44aa00;"></h5>
+
+
+
+<button class = "cancelbutton" style = "button">Back</button>
+<button class = "button1" style = "float:right">Add Student</button>
+<button class = "button1" style = "float:right">Remove Student</button>
+<table style = "width:100%">
+  <tr>
+    <th>Student</th>
+    <th>Schedule</th>
+    <th>Subjects</th>
+    <th>Locations</th>
+  </tr>
+  <tr>
+    <td>John Doe</td>
+    <td><button class = "cancelbutton">Edit Schedule</button></td>
+    <td><button class = "cancelbutton">Edit Subjects</button></td>
+    <td><button class = "cancelbutton">Edit Locations</button></td>
+  </tr>
+  <tr>
+    <td>Jane Doe</td>
+    <td><button class = "cancelbutton">Edit Schedule</button></td>
+    <td><button class = "cancelbutton">Edit Subjects</button></td>
+    <td><button class = "cancelbutton">Edit Locations</button></td>
+  </tr>
+  <tr>
+    <td>Jim Doe</td>
+    <td><button class = "cancelbutton">Edit Schedule</button></td>
+    <td><button class = "cancelbutton">Edit Subjects</button></td>
+    <td><button class = "cancelbutton">Edit Locations</button></td>
+  </tr>
+
+</table>
+</body>
+</html>
