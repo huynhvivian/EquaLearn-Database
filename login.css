@@ -1,6 +1,6 @@
 body{
     background-color: #50b018;
-    color:white;
+    color:black;
 } 
 #outer{
     background-color: #50b018;
@@ -8,7 +8,7 @@ body{
     width: 100%
 }      
 #formd{
-    background-color: #000000;
+    background-color: #ffffff;
     width: 45%;
     height:60%;
     position: absolute;
@@ -17,12 +17,13 @@ body{
     padding-top: 20px;
     text-align: center;
     border-radius: 5%;
+    overflow: auto;
 }
 input[type=text], input[type=password], button[type=submit]{
     width: 76%;
     color: rgb(83, 31, 31);
     font-weight: 700;
-    font-size: 14px;
+    font-size: 14px; 
     letter-spacing: 1px;
     padding: 10px 20px;
     border: none;
@@ -33,4 +34,45 @@ input[type=text], input[type=password], button[type=submit]{
     text-align: center;
     margin-bottom: 27px;
     font-family: 'Ubuntu', sans-serif;
+}
+
+#logo{
+    float:center; 
+    height:72px
+}
+
+@media only screen and (max-device-width: 480px){
+    #logo{
+        float:center; 
+        height:72px;
+        width: 95%;
+    }
+    input[type=text], input[type=password], button[type=submit]{
+        width: 95%;
+        color: rgb(83, 31, 31);
+        font-weight: 700;
+        font-size: medium; 
+        letter-spacing: 1px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        box-sizing: border-box;
+        border: 2px solid rgba(1, 219, 208, 0.02);
+        margin-bottom: 50px;
+        text-align: center;
+        margin-bottom: 27px;
+        font-family: 'Ubuntu', sans-serif;
+    }
+    #formd{
+        background-color: #ffffff;
+        width: 60%;
+        height:50%;
+        position: absolute;
+        top:0; bottom:0; left:0;right:0;
+        margin: auto;
+        padding-top: 20px;
+        text-align: center;
+        border-radius: 5%;
+        overflow: auto;
+    }
 }
