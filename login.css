@@ -75,4 +75,9 @@ input[type=text], input[type=password], button[type=submit]{
         border-radius: 5%;
         overflow: auto;
     }
+    body{
+        background-color: #50b018;
+        color:black;
+        font-size: small;
+    } 
 }
