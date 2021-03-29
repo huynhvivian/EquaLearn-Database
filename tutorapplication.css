@@ -9,8 +9,8 @@ body{
 }      
 #formd{
     background-color: #ffffff;
-    width: 45%;
-    height:60%;
+    width: 65%;
+    height: 90%;
     position: absolute;
     top:0; bottom:0; left:0;right:0;
     margin: auto;
@@ -19,7 +19,7 @@ body{
     border-radius: 5%;
     overflow: auto;
 }
-input[type=email], input[type=password], button[type=submit]{
+input, select, button[type=submit]{
     width: 76%;
     color: rgb(83, 31, 31);
     font-weight: 700;
@@ -34,6 +34,20 @@ input[type=email], input[type=password], button[type=submit]{
     text-align: center;
     margin-bottom: 27px;
     font-family: 'Ubuntu', sans-serif;
+}
+/*Adapted from https://stackoverflow.com/questions/572768/styling-an-input-type-file-button*/
+input[type="file"] {
+    display: none;
+}
+.transcript {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+/*End of adapted code*/
+select{
+    border: teal;
 }
 
 #logo{
@@ -65,8 +79,8 @@ input[type=email], input[type=password], button[type=submit]{
     }
     #formd{
         background-color: #ffffff;
-        width: 60%;
-        height:50%;
+        width: 80%;
+        height: 90%;
         position: absolute;
         top:0; bottom:0; left:0;right:0;
         margin: auto;
