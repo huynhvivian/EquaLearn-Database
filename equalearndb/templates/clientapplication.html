@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Equalearn Client Application Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel = "stylesheet" href="tutorapplication.css">
+
+</head>
+<body>
+    <div>
+    <div class="container" id="formd">
+        <img id = "logo" src = "loginequalearnlogo.png" alt = "EquaLearn Logo" style = "float:center; height:72px">
+        <form method="POST">
+            <br>
+            <input style="border-color: teal;" type="text" id ="fname" placeholder="Parent/Guardian First Name" name = "fname" required><br>
+            <input style="border-color: teal;" type="text" id="lname" placeholder="Parent/Guardian Last Name" name = "lname" required><br>
+            <input style="border-color: teal;" type="tel" id="number" placeholder="Phone Number" name = "number" required><br>
+            <input style="border-color: teal;" type="text" id="org" placeholder="External club/orgnaization (if applicable)" name = "org"><br>
+
+            <label for="lowincomestatus" class="transcript">Upload Low Income Status if not referred</label>
+            <input style="border-color: teal;" type="file" id="lowincomestatus" name = "lowincomestatus" required><br>
+            <br>
+            
+            <div>
+                <button type="submit" style="text-align: center;">Next Page</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</body>
