@@ -34,7 +34,7 @@ td {
 <div class="rectangle"></div>
 
 <!-- BUTTONS -->
-<button class = "button1" style = "button;">Hours</button>
+<a href = "volunteer_hours"><button class = "button1" style = "button;">Hours</button></a>
 <button class = "signupbutton" style = "button;">Sign up</button>
 <button class = "editprofilebutton" style = "button;">Edit Profile</button>
 
@@ -59,7 +59,7 @@ td {
                 {{session.getstudent}}
               </td>
               <td> {{session.date}} </td>
-              <td> {{session.start_time}} - {{session.end_time}}</td>
+              <td> {{session.getstart}} - {{session.getend}}</td>
               <td> {{session.location}} </td>
               <td> {{session.getcoursename}} {{session.getcourselevel}} </td>
               <td> {{session.status}} </td>
@@ -68,35 +68,7 @@ td {
             {% endfor %}
           </tbody>
         </table>
-<!--  <tr>
-    <td><center>John Doe</center></td>
-    <td><center>March 28 2021</center></td>
-    <td><center>10:00-12:00</center></td>
-    <td><center>Online</center></td>
-    <td><center>Math 10</center></td>
-    <td><center>In Future</center></td>
-    <td><center><button class = "tablebutton">Cancel Meeting</button></center></td>
-  </tr>
-  <tr>
-    <td><center>Bob Smith</center></td>
-    <td><center>March 25 2021</center></td>
-    <td><center>3:00-5:00</center></td>
-    <td><center>Online</center></td>
-    <td><center>Math 10</center></td>
-    <td><center>Unverified</center></td>
-    <td><center><button class = "tablebutton">Cancel Meeting</button></center></td>
-  </tr>
-  <tr>
-    <td><center>Jane Doe</center></td>
-    <td><center>March 22 2021</center></td>
-    <td><center>1:00-2:00</center></td>
-    <td><center>Calgary Public Library</center></td>
-    <td><center>Physics 30</center></td>
-    <td><center>Verified</center></td>
-    <td><center><button class = "tablebutton">Cancel Meeting</button></center></td>
-  </tr>
-        </tbody>
-      </table> -->
+
     </div>
 
 </body>
