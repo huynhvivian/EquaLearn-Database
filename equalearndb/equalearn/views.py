@@ -14,3 +14,11 @@ from .models import Subject
 def volunteer_dashboard(request):
     sessions = Session.objects.all()
     return render(request, 'volunteerdashboard.html', {'sessions': sessions})
+
+def volunteer_hours(request):
+    sessions = Session.objects.filter(status ='Verified')
+    total = 0
+    for session in sessions:
+        total = total + session.totalhours()
+
+    return render(request, 'viewhours.html', {'sessions': sessions, 'hours': total})
