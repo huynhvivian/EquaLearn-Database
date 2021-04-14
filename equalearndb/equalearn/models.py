@@ -1,5 +1,6 @@
 from django.db import models
 #from django.db import User
+import datetime
 
 # Create your models here.
 
@@ -36,8 +37,8 @@ class Session(models.Model):
     student_name = models.ForeignKey(Student, related_name = 'sessions', on_delete = models.CASCADE)
     subject_id = models.ForeignKey(Subject, related_name = 'sessions', on_delete = models.CASCADE)
     date = models.DateField()
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
     location = models.CharField(max_length = 50)
     status = models.CharField(max_length = 50)
 
@@ -49,6 +50,16 @@ class Session(models.Model):
 
     def getcourselevel(self):
         return self.subject_id.grade_level
+
+    def totalhours(self):
+        return (self.end_time - self.start_time).seconds // 3600
+
+    def getstart(self):
+        return (datetime.datetime.strftime(self.start_time, "%I:%M"))
+
+    def getend(self):
+        return (datetime.datetime.strftime(self.end_time, "%I:%M"))
+
 
 #class About(models.Model):
 #    session_id = models.ForeignKey(Session, related_name = 'about', on_delete = models.CASCADE)
