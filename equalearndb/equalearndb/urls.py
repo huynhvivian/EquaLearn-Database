@@ -19,5 +19,6 @@ from equalearn import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('volunteer_dashboard', views.volunteer_dashboard, name="volunteers")
+    path('volunteer_dashboard', views.volunteer_dashboard, name="volunteers"),
+    path('volunteer_hours', views.volunteer_hours)
 ]
