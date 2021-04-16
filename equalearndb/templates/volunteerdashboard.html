@@ -26,8 +26,6 @@ td {
 </style>
 </head>
 
-<button class = "logoutbutton">Log Out</button>
-
 <img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
 
 <h1> Volunteer Dashboard - {{tutor.name}}</h1>
@@ -39,6 +37,7 @@ td {
 <a href = "{% url 'session_signups' id=tutor.User_ID%}"><button class = "signupbutton" style = "button;">Sign up</button></a>
 {% endif %}
 <button class = "editprofilebutton" style = "button;">Edit Profile</button>
+<a href = "{% url 'logout'%}"><button class = "logoutbutton">Log Out</button></a>
 
 <!-- TABLE -->
     <div class="tableFixHead">

@@ -1,10 +1,15 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from accounts.forms import SignUpForm
 from equalearn.models import User as EqualearnUser
 from equalearn.models import Tutor
 from equalearn.models import Client
 from equalearn.models import Executive
+
+def pagelogout(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('home')
 
 def signup(request):
     if request.method == 'POST':
