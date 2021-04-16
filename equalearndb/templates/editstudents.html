@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type = "text/css" href="{% static 'equalearndb/dashboardstyle.css' %}">
+<style>
+  
+</style>
+</head>
+
+<button class = "logoutbutton">Log Out</button>
+  
+<img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
+
+<h1> Edit Students</h1>
+<div class="rectangle"></div>
+
+<!-- BUTTONS -->
+<a href = "client_dashboard"><button class = "button1">Client Dashboard</button></a>
+<button class = "editprofilebutton">Add Student</button>
+
+<!-- TABLE -->
+    <div class="tableFixHead">
+      <table>
+        <thead>
+                <th>Student Name</th>
+                <th>School</th>
+                 <th>Edit/Cancel</th>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr style="text-align: center;">
+                <td style="text-align: center;">{{student.getstudentname}}</td>
+                <td style="text-align: center;">{{student.getschool}}</td>
+                <td style="text-align: center;"><button class = "tablebutton">Edit/View Subjects</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  
+</body>
+</html>

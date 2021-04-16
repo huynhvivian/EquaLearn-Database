@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <title>Equalearn Tutor Application Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = "stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel = "stylesheet" type = "text/css" href="{% static 'equalearndb/tutorapplication.css' %}">
+
+</head>
+<body>
+    <div>
+    <div class="container" id="formd">
+        <img id = "logo" src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" style = "float:center; height:72px">
+        <form action = "{% url 'choose_tutor' id=tutor.User_ID %}"method="POST"> {% csrf_token %}
+            <br>
+            <input style="border-color: teal;" type="text" id ="fullname" placeholder="Full Name" name = "fullname" required><br>
+            <!-- <input style="border-color: teal;" type="text" id="lname" placeholder="Last Name" name = "lname" required><br> -->
+            <!-- <input style="border-color: teal;" type="tel" id="number" placeholder="Phone Number" name = "number" required><br> -->
+            <input style="border-color: teal;" type="text" id="grade" placeholder="What grade/university year are you in?" name = "grade" required><br>
+            <input style="border-color: teal;" type="text" id="org" placeholder="External club/orgnaization (if applicable)" name = "org"><br>
+            <!-- <input style="border-color: teal;" type="search" id="subj" placeholder="Search for subjects you can teach" name = "subj"><br> -->
+            <!-- <input style="border-color: teal;" type="text" id="newsubj" placeholder="Add courses not available in search" name = "newsubj"><br> -->
+
+            <label for="preference">Preference: </label>
+
+            <select name="preference" id="preference">
+                <option value="online">Online</option>
+                <option value="live">In Person</option>
+                <option value="both">Both</option>
+            </select> <br>
+            <!-- <label for="transcript" class="transcript">Upload Transcript</label> -->
+            <!-- <input style="border-color: teal;" type="file" id="transcript" name = "transcript" required><br> -->
+            <br>
+            <!-- <p1 style="text-align: left;">I recognize that all of this information will be collected under Alberta's Personal Information Protection Act (PIPA). -->
+            <!-- <br>Equalearn can only use said information for the purpose of service and communication.This question is required. </p1> -->
+            <!-- <br><input style="border-color: teal;" type="checkbox" id="transcript" name = "transcript" required ><br> -->
+            <br>
+            <div>
+                <button type="submit" style="text-align: center;">Sign Up</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</body>

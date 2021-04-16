@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type = "text/css" href="{% static 'equalearndb/dashboardstyle.css' %}">
+<style>
+
+.signupbutton {
+  position: absolute;
+  top: 160px;
+  right: 180px;
+  border: none;
+  background-color:#44aa00;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 4px
+}
+
+td {
+  text-align: center;
+}
+</style>
+</head>
+
+<button class = "logoutbutton">Log Out</button>
+
+<img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
+
+<h1> Volunteer Dashboard - {{tutor.name}}</h1>
+<div class="rectangle"></div>
+
+<!-- BUTTONS -->
+<a href = "{% url 'volunteer_hours' id=tutor.User_ID%}"><button class = "button1" style = "button;">Hours</button></a>
+{% if tutor.accepted == True%}
+<a href = "{% url 'session_signups' id=tutor.User_ID%}"><button class = "signupbutton" style = "button;">Sign up</button></a>
+{% endif %}
+<button class = "editprofilebutton" style = "button;">Edit Profile</button>
+
+<!-- TABLE -->
+    <div class="tableFixHead">
+      <table>
+        <thead>
+   <tr>
+    <th>Student</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Subject</th>
+    <th>Status</th>
+    <th>Cancel?</th>
+  </tr>
+        </thead>
+        <tbody>
+          {% for session in sessions %}
+            <tr>
+              <td>
+                {{session.getstudent}}
+              </td>
+              <td> {{session.date}} </td>
+              <td> {{session.getstart}} - {{session.getend}}</td>
+              <td> {{session.location}} </td>
+              <td> {{session.getcoursename}} {{session.getcourselevel}} </td>
+              <td> {{session.status}} </td>
+              <td> <a href = "{% url 'edit_session' uid=tutor.User_ID sid=session.session_id %}"><button class = "tablebutton">Edit/Cancel Meeting</button></a> </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>

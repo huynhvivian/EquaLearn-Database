@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'equalearndb/dashboardstyle.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+.btn {
+  background-color: #44aa00;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 20px;
+  margin: 4px 2px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  top: 170px;
+}
+
+.btn:hover {
+  background-color: green;
+}
+</style>
+</head>
+
+<button class = "logoutbutton">Log Out</button>
+
+<img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
+
+<h1> Executive Dashboard - {{executive.name}}</h1>
+<div class="rectangle"></div>
+
+<!-- BUTTONS -->
+<button class = "editprofilebutton" style = "button;">Edit Profile</button>
+<button class="btn"><i class="fa fa-check"></i> Approve client applications</button>
+<a href = "{% url 'approve_volunteers' id=executive.User_ID %}"><button class="btn"><i class="fa fa-check"></i> Approve volunteer applications</button></a>
+<a href = "{% url 'approve_hours' eid=executive.User_ID%}"><button class="btn"><i class="fa fa-check"></i> Approve volunteer hours</button></a>
+<a href = "{% url 'view_sessions' eid=executive.User_ID%}"><button class="btn"><i class="fa fa-check"></i> Approve sign ups</button></a>
+
+
+</body>
+</html>

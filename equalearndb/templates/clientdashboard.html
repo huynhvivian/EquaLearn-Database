@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type = "text/css" href="{% static 'equalearndb/dashboardstyle.css' %}">
+<style>
+  
+</style>
+</head>
+
+<button class = "logoutbutton">Log Out</button>
+  
+<img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
+
+<h1> Client Dashboard </h1>
+<div class="rectangle"></div>
+
+<!-- BUTTONS -->
+<a href = "editstudents"><button class = "button1" style = "button;">Edit Students</button></a>
+<button class = "editprofilebutton" style = "button;">Edit Profile</button>
+
+<!-- TABLE -->
+    <div class="tableFixHead">
+      <table>
+        <thead>
+              <tr>
+    <th>Student</th>
+    <th>Volunteer</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Location</th>
+    <th>Subject</th>
+    <th>Status</th>
+    <th>Edit/Cancel</th>
+  </tr>
+      </thead>
+    <tbody>
+      {% for session in sessions %}
+       <!-- {% if session.getclient == } -->
+        <tr>
+          <td>{{session.getstudent}}</td>
+          <td>{{session.getvolunteer}}</td>
+          <td> {{session.date}} </td>
+          <td> {{session.getstart}} - {{session.getend}}</td>
+          <td> {{session.location}} </td>
+          <td> {{session.getcoursename}} {{session.getcourselevel}} </td>
+          <td> {{session.status}} </td>
+          <td> <button class = "tablebutton">Edit/Cancel</button> </td>
+        </tr>
+      {% endfor %}
+    </tbody>  
+    </div>
+  
+</body>
+</html>
