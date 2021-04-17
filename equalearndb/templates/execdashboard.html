@@ -28,8 +28,6 @@
 </style>
 </head>
 
-<button class = "logoutbutton">Log Out</button>
-
 <img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
 
 <h1> Executive Dashboard - {{executive.name}}</h1>
@@ -41,7 +39,7 @@
 <a href = "{% url 'approve_volunteers' id=executive.User_ID %}"><button class="btn"><i class="fa fa-check"></i> Approve volunteer applications</button></a>
 <a href = "{% url 'approve_hours' eid=executive.User_ID%}"><button class="btn"><i class="fa fa-check"></i> Approve volunteer hours</button></a>
 <a href = "{% url 'view_sessions' eid=executive.User_ID%}"><button class="btn"><i class="fa fa-check"></i> Approve sign ups</button></a>
-
+<a href = "{% url 'logout'%}"><button class = "logoutbutton">Log Out</button></a>
 
 </body>
 </html>

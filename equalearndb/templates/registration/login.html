@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
@@ -9,26 +10,29 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel = "stylesheet" href="login.css">
+    <link rel="stylesheet" type = "text/css" href="{% static 'equalearndb/login.css' %}">
 
 </head>
+
 <body>
     <div>
     <div class="container" id="formd">
-        <img id = "logo" src = "loginequalearnlogo.png" alt = "EquaLearn Logo" style = "float:center; height:72px">
-        <form method="GET">
+        <img id = "logo" src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" style = "float:center; height:72px">
+        <form method="POST"> {% csrf_token %}
             <br>
-            <input style="border-color: teal;" type="email" id ="username" placeholder="Username" name = "username" required><br>
-            <input style="border-color: teal;" type="password" placeholder="Password" name = "psw" required><br>
+            <!--# change username to email later --> 
+            {{ form.as_p }}
+            <!-- <input style="border-color: teal;" type="username" id ="username" placeholder="Username" name = "username" required><br>
+            <input style="border-color: teal;" type="password" placeholder="Password" name = "psw" required><br> -->
             <div>
                 <button type="submit" style="text-align: center;">Login</button>
             </div>
         </form>
         <form>
         Don't have an account?
-        <a href="signup.html" style="color: black; background-color: white; border-color: white; font-style: italic;">Sign up.</a> <br>
+        <a href="{% url 'signup'%}" style="color: black; background-color: white; border-color: white; font-style: italic;">Sign up.</a> <br>
         <a href="changepassword.html" style="color: black; background-color: white; border-color: white;">Forgot Password?</a>
         </form>
+        </div>
     </div>
-    </div>
-</body>
+</body> 
