@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <title>Equalearn Login Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type = "text/css" href="{% static 'equalearndb/login.css' %}">
+
+</head>
+
+<body>
+    <div>
+    <div class="container" id="formd">
+        <img id = "logo" src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" style = "float:center; height:72px">
+        <form method="POST" action="{% url 'login' %}"> {% csrf_token %}
+            <br>
+            <!--# change username to email later --> 
+            <input style="border-color: teal;" type="username" id ="username" placeholder="Username" name = "username" required><br>
+            <input style="border-color: teal;" type="password" placeholder="Password" name = "password" required><br> 
+            <div>
+                <button type="submit" style="text-align: center;">Login</button>
+            </div>
+        </form>
+        <form>
+        Don't have an account?
+        <a href="{% url 'signup'%}" style="color: black; background-color: white; border-color: white; font-style: italic;">Sign up.</a> <br>
+        <a href="changepassword.html" style="color: black; background-color: white; border-color: white;">Forgot Password?</a>
+        </form>
+        </div>
+    </div>
+</body> 
