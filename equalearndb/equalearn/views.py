@@ -108,6 +108,17 @@ def approve_tutor(request, eid, tid):
     tutor.save()
     return redirect('approve_volunteers', id=eid)
 
+def view_pending_clients(request, id):
+    exec = Executive.objects.get(User_ID = id)
+    unapprovedclients = Client.objects.filter(accepted = False)
+    return render(request, 'approveclients.html', {'executive': exec, 'clients': unapprovedclients})
+
+def approve_client(request, eid, cid):
+    client = Client.objects.get(User_ID = cid)
+    client.accepted = True
+    client.save()
+    return redirect('view_pending_clients', id=eid)
+
 def volunteer_dashboard(request, id):
     #id = volunteer's user ID
     tutor = Tutor.objects.get(User_ID = id)
@@ -175,7 +186,7 @@ def approve_sessions(request, eid, psessionid):
     return redirect('executive_dashboard', id=eid)
 
 def sessions_signed_up(request, tid, takeid):
-    #Make sessions from next-next session to the end... so we'd need current date, the weekday, ummm
+    #Make sessions from next-next session to the end... so we'd need current date, and the weekday
     currentday = datetime.date(datetime.now())
     thistake = Takes.objects.get(takes_id = takeid)
     thistake.current_tutor = Tutor.objects.get(User_ID = tid)
@@ -236,10 +247,17 @@ def editstudents(request, id):
     students = Student.objects.filter(user_id_client=id)
     return render(request, 'editstudents.html', {'students': students, 'client': client})
 
+def choosesubject(request, id):
+    client = Client.objects.get(User_ID = id)
+    subjects = Subject.objects.all()
+    return(request, 'choosesubject.html', {'subjects': subjects, 'client': client})
+
 def editsubject(request, id, name):
-    student = Student.objects.filter(user_id_client=id)
-    takes = Takes.objects.filter(student_name=student.name)
-    client = takes.getclient
+    student = Student.objects.filter(user_id_client=id, name = name)
+    takes = Takes.objects.filter(student_name__in=student)
+    client = Client.objects.get(User_ID = id)
+#    for take in takes:
+#        client = take.student_name.user_id_client
     return render(request, 'editsubject.html', {'takes': takes, 'client': client})
 
 def client_edit_session(request, uid, sid):
@@ -338,13 +356,19 @@ def addstudent(request, id):
 def studentadded(request, id):
     client = Client.objects.get(User_ID = id)
     if request.method == 'POST':
-        if request.POST.get('fullname') and request.POST.get('school'):
-            student = Student()
-            student.name = request.POST.get('fullname')
-            student.school = request.POST.get('school')
-            student.user_id_client = client
-            student.save()
-    
-    client = Client.objects.get(User_ID = id)
-    students = Student.objects.filter(user_id_client = id)
-    return render(request, 'editstudents.html', {'students': students, 'client': client})
+        #if request.POST.get('fullname') and request.POST.get('school'):
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        fullname = fname + " " + lname
+        Student.objects.create(
+            name = fullname,
+            school = request.POST.get('school'),
+            user_id_client = client
+        )
+            #student = Student()
+            #student.name = request.POST.get('fullname')
+            #student.school = request.POST.get('school')
+            #student.user_id_client = client
+            #student.save()
+
+    return redirect('editstudents', id=id)
