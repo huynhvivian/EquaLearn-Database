@@ -42,10 +42,11 @@ def signup(request):
 # def signup(request):
 #     if request.method == 'POST':
 #         username = request.POST.get('username')
+#         email = request.POST.get('email')
 #         raw_password = request.POST.get('password')
 #         user = authenticate(username=username, password=raw_password)
-#         login(request, user)
-#         newuser = EqualearnUser.objects.create(username=username, email=username)
+#         # login(request, user)
+#         newuser = EqualearnUser.objects.create(username=username, email=email)
 #         newuser.save()
 #         return redirect('choose_account', id=newuser.User_ID)
 #     return render(request, 'signup.html')
