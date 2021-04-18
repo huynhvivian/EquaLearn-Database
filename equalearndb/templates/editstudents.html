@@ -26,14 +26,18 @@
         <thead>
                 <th>Student Name</th>
                 <th>School</th>
-                 <th>Edit/Cancel</th>
+                <th>Availabilities</th>
+                 <th>Edit/View Subjects</th>
+                <th>Change Schedule</th>
         </thead>
         <tbody>
             {% for student in students %}
             <tr style="text-align: center;">
                 <td style="text-align: center;">{{student.getstudentname}}</td>
                 <td style="text-align: center;">{{student.getschool}}</td>
+                <td style = "text-align: center;">{%for schedule in student.schedule.all %}{{schedule.gettimeslot}}<br>{% endfor %}</td>
                 <td> <a style="text-align: center;" href = {% url 'editsubject' id=client.User_ID name=student.getstudentname %}><button class = "tablebutton">Edit/View Subjects</button></a> </td>
+                <td> <a style="text-align: center;" href = {% url 'changeschedule' cid=client.User_ID sname=student.getstudentname %}><button class = "tablebutton">Change Schedule</button></a> </td>
             </tr>
             {% endfor %}
         </tbody>
