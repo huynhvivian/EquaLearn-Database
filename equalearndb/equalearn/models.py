@@ -6,6 +6,8 @@ import datetime
 
 class User(models.Model):
     User_ID = models.AutoField(primary_key = True)
+    username = models.CharField(max_length = 100, unique = True)
+    usertype = models.CharField(max_length = 10, blank = True, null = True)
     name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length = 12)
     email = models.CharField(max_length = 60)

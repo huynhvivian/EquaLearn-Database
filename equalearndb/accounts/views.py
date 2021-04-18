@@ -5,6 +5,8 @@ from equalearn.models import User as EqualearnUser
 from equalearn.models import Tutor
 from equalearn.models import Client
 from equalearn.models import Executive
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def pagelogout(request):
     if request.method == "POST":
@@ -23,8 +25,8 @@ def signup(request):
             name = fname + " " + lname
             email = form.cleaned_data.get('email')
             user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            newuser = EqualearnUser.objects.create(name = name, email = email, phone_number="x")
+            #login(request, user)
+            newuser = EqualearnUser.objects.create(name = name, username = username, email = email, phone_number="x")
             return redirect('choose_account', id=newuser.User_ID)
     else:
         form = SignUpForm()
@@ -45,55 +47,66 @@ def tutor_app(request, id):
 def choose_tutor(request, id):
     if request.method == 'POST':
         user = EqualearnUser.objects.get(User_ID = id)
-        tutor = Tutor()
-        tutor.User_ID = user.User_ID
-        tutor.name = request.POST.get('fullname')
-        tutor.grade = request.POST.get('grade')
-        tutor.club = request.POST.get('club')
+        user.usertype = "tutor"
+        user.save()
 
-        tutor.preference_online = request.POST.get("preference"),
-        tutor.email = user.email
+        tutor = Tutor.objects.create(
+         User_ID = user.User_ID,
+         username = user.username,
+         usertype = "tutor",
+         name = user.name,
+         email = user.email,
+         phone_number = "xxx-xxx-xxxx", #get this in volunteer form or sign-up form please
+         preference_online = request.POST.get("preference")
+        )
 
-        tutor.save()
-        
-        # if (p == "live"):
-            # preference = False
-        # else:
-            # preference = True
-        
-        # tutor.preference_online = preference
-
-        # tutor = Tutor.objects.create(
-        #     User_ID = user.User_ID,
-        #     name = user.name,
-        #     email = user.email,
-        #     phone_number = request.POST.get("number"),
-        #     preference_online = preference
-        # )
-        
-    return redirect('volunteer_dashboard', id=id)
+    return redirect('login')
 
 def choose_exec(request, id):
     if request.method == 'POST':
         user = EqualearnUser.objects.get(User_ID = id)
+        user.usertype = "executive"
+        user.save()
         exec = Executive.objects.create(
             User_ID = user.User_ID,
+            username = user.username,
+            usertype = "executive",
             name = user.name,
             email = user.email,
             phone_number = user.phone_number,
             position = "placeholder"
         )
-    return redirect('executive_dashboard', id=id)
+    return redirect('login')
 
 def choose_client(request, id):
     if request.method == 'POST':
         user = EqualearnUser.objects.get(User_ID = id)
+        user.usertype = "client"
+        user.save()
         exec = Client.objects.create(
             User_ID = user.User_ID,
+            username = user.username,
+            usertype = "client",
             name = user.name,
             email = user.email,
             phone_number = request.POST.get("number"),
             referred_organization = request.POST.get("org"),
             proof_of_low_income = True
         )
-    return redirect('client_dashboard', id=id)
+    return redirect('login')
+
+def getusername(request):
+    return HttpResponseRedirect(reverse('home', args=[request.user.username]))
+
+def home(request, username):
+    #username = HttpResponseRedirect(reverse())
+    user = EqualearnUser.objects.get(username = username)
+    type = user.usertype
+    if (type == "executive"):
+        return redirect('executive_dashboard', id=user.User_ID)
+    elif (type == "tutor"):
+        return redirect('volunteer_dashboard', id = user.User_ID)
+    elif (type == "client"):
+        return redirect('client_dashboard', id = user.User_ID)
+    else:
+        return redirect('login')

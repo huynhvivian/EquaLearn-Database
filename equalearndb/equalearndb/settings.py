@@ -128,4 +128,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 
-LOGIN_REDIRECT_URL = '/' # should go to home page
+LOGIN_REDIRECT_URL = '/getusername/' # should go to home page

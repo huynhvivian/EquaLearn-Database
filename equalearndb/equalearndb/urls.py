@@ -22,10 +22,12 @@ from accounts import views as accounts_views
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('', include('django.contrib.auth.urls')), 
+    path('', include('django.contrib.auth.urls')),
 
     # log in, log out, applications
-
+    url(r'^home/(?P<username>[\w\-]+)/$', accounts_views.home, name = "home"),
+#    url(r'login/', accounts_views.login, name = "login"),
+    url(r'getusername/', accounts_views.getusername, name = "getusername"),
     url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'client_app/(?P<id>\d+)/$', accounts_views.client_app, name = "client_app"),
     url(r'tutor_app/(?P<id>\d+)/$', accounts_views.tutor_app, name = "tutor_app"),
