@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type = "text/css" href="{% static 'equalearndb/dashboardstyle.css' %}">
 <style>
-  
+
 </style>
 </head>
 
 <button class = "logoutbutton">Log Out</button>
-  
+
 <img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
 
 <h1> Edit Subjects</h1>
 <div class="rectangle"></div>
 
 <!-- BUTTONS -->
-<a href = "editstudents"><button class = "button1">Edit Students</button></a>
-<button class = "editprofilebutton">Add Subject</button>
+<a href = "{% url 'editstudents' id=client.User_ID%}"><button class = "button1">Back to All Students</button></a>
+<!--<a href = "{#% url 'choosesubject' id=client.User_ID name=takes.getstudentname%}"><button class = "editprofilebutton">Add Student</button></a>-->
+
 
 <!-- TABLE -->
     <div class="tableFixHead">
@@ -26,6 +27,7 @@
         <thead>
                 <th>Subject Name</th>
                 <th>Grade Level</th>
+                <th>Tutor</th>
                 <th>End Date</th>
                 <th>Change End Date</th>
         </thead>
@@ -34,6 +36,7 @@
             <tr style="text-align: center;">
                 <td style="text-align: center;">{{take.getcoursename}}</td>
                 <td style="text-align: center;">{{take.getcourselevel}}</td>
+                <td style="text-align: center;">{{take.gettutor}}</td>
                 <td style="text-align: center;">{{take.getenddate}}</td>
                 <td style="text-align: center;"><button class = "tablebutton">Edit</button></td>
             </tr>
@@ -41,6 +44,6 @@
         </tbody>
       </table>
     </div>
-  
+
 </body>
 </html>
