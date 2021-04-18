@@ -8,6 +8,13 @@ from equalearn.models import Executive
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+def login_page(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+ 
 def pagelogout(request):
     if request.method == "POST":
         logout(request)
