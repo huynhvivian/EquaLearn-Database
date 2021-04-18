@@ -1,7 +1,0 @@
-<!DOCTYPE html>
-{% load static %}
-<html>
-<a href = "{% url 'client_app' id=user.User_ID%}"><button>Parent/Guardian</button></a>
-<a href = "{% url 'tutor_app' id=user.User_ID%}"><button>Volunteer</button></a>
-<a href = "{% url 'choose_exec' id=user.User_ID%}"><button>Executive</button></a>
-</html>
