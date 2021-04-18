@@ -46,6 +46,12 @@ urlpatterns = [
     url(r'view_volunteer_hours/(?P<eid>\d+)/(?P<tid>\d+)/$', views.view_volunteer_hours, name = "view_volunteer_hours"),
     url(r'approve_hours/(?P<eid>\d+)/$', views.approve_hours, name = "approve_hours"),
     url(r'session_signups/(?P<id>\d+)/$', views.session_signups, name = "session_signups"),
+
+    url(r'client_edit_session/(?P<uid>\d+)/(?P<sid>\d+)/$', views.client_edit_session, name = "client_edit_session"),
+    url(r'client_confirm_session/(?P<tid>\d+)/(?P<sid>\d+)/$', views.client_submit_edited_sessions, name = "client_confirm_session"),
+
+    url(r'client_cancel_session/(?P<tid>\d+)/(?P<sid>\d+)/$', views.client_cancel_session, name = "client_cancel_session"),
+
     url(r'edit_session/(?P<uid>\d+)/(?P<sid>\d+)/$', views.edit_sessions, name = "edit_session"),
     url(r'confirm_session/(?P<tid>\d+)/(?P<sid>\d+)/$', views.submit_edited_sessions, name = "confirm_session"),
     url(r'cancel_session/(?P<tid>\d+)/(?P<sid>\d+)/$', views.cancel_session, name = "cancel_session"),
@@ -54,8 +60,13 @@ urlpatterns = [
     url(r'sessions_signed_up/(?P<tid>\d+)/(?P<takeid>\d+)/$', views.sessions_signed_up, name = "sessions_signed_up"),
     url(r'client_dashboard/(?P<id>\d+)/$', views.client_dashboard, name="client_dashboard"),
     url(r'editstudents/(?P<id>\d+)/$', views.editstudents, name = "editstudents"),
+
     url(r'addstudent/(?P<id>\d+)/$', views.addstudent, name = "addstudent"),
+
     url(r'studentadded/(?P<id>\d+)/$', views.studentadded, name = "studentadded"),
-    url(r'editsubject/(?P<id>\d+)/(?P<string>[\w\-]+)/$', views.editsubject, name = "editsubject"),
+
+    url(r'editsubject/(?P<id>\d+)/(?P<name>[\w\s]+)/$', views.editsubject, name = "editsubject"),
+
+    url(r'choosesubject/(?P<id>\d+)/(?P<name>[\w\s]+)/$', views.choosesubject, name = "choosesubject"),
     path('', include('equalearn.urls'))
 ]

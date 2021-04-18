@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <title>Choose Subject</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = "stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type = "text/css" href="{% static 'equalearndb/addstudent.css' %}">
+</head>
+
+<body>
+  <div>
+    <div class="container" id="formd">
+      <img id = "logo" src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" style = "float:center; height:72px">
+      <form action= "{% url 'confirmchoosesubject' tid=client.User_ID sid=session.session_id %}" method = POST>
+      <br><br>
+      <select name = 'choosesubject'>
+        {% for subject in subjects %}
+        <option> {{subject.getsubject}} </option>
+        {% endfor %}
+      </select>
+
+      {% csrf_token %}<button type = "submit">Confirm</button></form>
+    </form>
+
+      <form action = "{% url 'client_dashboard' id=client.User_ID%}" method = POST>{% csrf_token %}
+        <button type="submit">Cancel Changes</button></form>
+      </div>
+      </div>
+      </body>
+</html>

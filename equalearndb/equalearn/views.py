@@ -247,10 +247,17 @@ def editstudents(request, id):
     students = Student.objects.filter(user_id_client=id)
     return render(request, 'editstudents.html', {'students': students, 'client': client})
 
+def choosesubject(request, id):
+    client = Client.objects.get(User_ID = id)
+    subjects = Subject.objects.all()
+    return(request, 'choosesubject.html', {'subjects': subjects, 'client': client})
+
 def editsubject(request, id, name):
-    student = Student.objects.filter(user_id_client=id)
-    takes = Takes.objects.filter(student_name=student.name)
-    client = takes.getclient
+    student = Student.objects.filter(user_id_client=id, name = name)
+    takes = Takes.objects.filter(student_name__in=student)
+    client = Client.objects.get(User_ID = id)
+#    for take in takes:
+#        client = take.student_name.user_id_client
     return render(request, 'editsubject.html', {'takes': takes, 'client': client})
 
 def client_edit_session(request, uid, sid):
