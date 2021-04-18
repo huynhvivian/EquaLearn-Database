@@ -38,6 +38,8 @@ urlpatterns = [
 
     url(r'approve_volunteers/(?P<id>\d+)/$', views.approve_volunteers, name = "approve_volunteers"),
     url(r'approve_tutor/(?P<eid>\d+)/(?P<tid>\d+)/$', views.approve_tutor, name = "approve_tutor"),
+    url(r'view_pending_clients/(?P<id>\d+)/$', views.view_pending_clients, name = "view_pending_clients"),
+    url(r'approve_client/(?P<eid>\d+)/(?P<cid>\d+)/$', views.approve_client, name = "approve_client"),
     url(r'volunteer_dashboard/(?P<id>\d+)/$', views.volunteer_dashboard, name="volunteer_dashboard"),
     url(r'executive_dashboard/(?P<id>\d+)/$', views.executive_dashboard, name = "executive_dashboard"),
     url(r'volunteer_hours/(?P<id>\d+)/$', views.volunteer_hours, name = "volunteer_hours"),

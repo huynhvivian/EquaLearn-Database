@@ -5,17 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type = "text/css" href="{% static 'equalearndb/dashboardstyle.css' %}">
 <style>
-  
+
 </style>
 </head>
-  
+
 <img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
 
-<h1> Client Dashboard </h1>
+<h1> Client Dashboard - {{client.name}}</h1>
 <div class="rectangle"></div>
 
 <!-- BUTTONS -->
-<a href = "editstudents"><button class = "button1" style = "button;">Edit Students</button></a>
+{% if client.accepted == True %}
+<a href = "{% url 'editstudents' id=client.User_ID %}"><button class = "button1" style = "button;">Edit Students</button></a>
+{% endif %}
 <button class = "editprofilebutton" style = "button;">Edit Profile</button>
 <a href = "{% url 'logout'%}"><button class = "logoutbutton">Log Out</button></a>
 
@@ -49,8 +51,8 @@
           <td> <button class = "tablebutton">Edit/Cancel</button> </td>
         </tr>
       {% endfor %}
-    </tbody>  
+    </tbody>
     </div>
-  
+
 </body>
 </html>
