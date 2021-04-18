@@ -138,6 +138,22 @@ def choose_client(request, id):
 def getusername(request):
     return HttpResponseRedirect(reverse('home', args=[request.user.username]))
 
+def edit_profile(request, username):
+    user = EqualearnUser.objects.get(username = username)
+    type = user.usertype
+    if (type == "executive"):
+        return redirect('edit_profile_exec', id=user.User_ID)
+    # elif (type == "tutor"):
+        # return redirect('volunteer_dashboard', id = user.User_ID)
+    # elif (type == "client"):
+        # return redirect('client_dashboard', id = user.User_ID)
+    # else:
+        # return redirect('login')
+
+def edit_profile_exec(request, id):
+    exec = Executive.objects.get(User_ID = id)
+    return render(request, 'editprofileexec.html', {'executive': exec})
+
 def home(request, username):
     #username = HttpResponseRedirect(reverse())
     user = EqualearnUser.objects.get(username = username)
