@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="dashboardstyle.css">
+  <link rel="stylesheet" href="{% static 'equalearndb/dashboardstyle.css' %}">
 <style>
   h2 {
   color: #333333;
@@ -14,8 +15,8 @@
 </style>
 </head>
 
-<button class = "logoutbutton">Log Out</button>
-  
+<a href = "{% url 'logout'%}"><button class = "logoutbutton">Log Out</button></a>
+
 <img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
 
 <h1> Executive Dashboard </h1>
@@ -31,85 +32,27 @@
       <table>
         <thead>
    <tr>
-    <th>Parent's name</th>
-    <th>Child's name</th>
-    <th>Grade</th>
-    <th>School</th>
+    <th>Client Name</th>
     <th>Email</th>
     <th>Phone</th>
-    <th>Documentation</th>
-    <th>Preference</th>
+    <th>Organization</th>
+    <th>Proof of Low Income</th>
     <th>Approve</th>
   </tr>
+  {% for client in clients%}
   <tr>
-    <td><center>Sarah Tran</center></td>
-    <td><center>Amy Tran</center></td>
-    <td><center>2</center></td>
-    <td><center>Ted Harrison School</center></td>
-    <td><center>sarahtran@gmail.com</center></td>
-    <td><center>587-123-4567</center></td>
-    <td><center>Uploaded</center></td>
-    <td><center>Online</center></td>
-    <td><center><button class = "tablebutton">Approve</button></center></td>
+    <td><center>{{client.name}}</center></td>
+    <td><center>{{client.email}}</center></td>
+    <td><center>{{client.phone_number}}</center></td>
+    <td><center>{{client.referred_organization}}</center></td>
+    <td><center>{{client.proof_of_low_income}}</center></td>
+    <td><center><a href = "{% url 'approve_client' eid=executive.User_ID cid=client.User_ID %}"><button class = "tablebutton">Approve</button></a></center></td>
   </tr>
-   <tr>
-    <td><center>Sarah Tran</center></td>
-    <td><center>Amy Tran</center></td>
-    <td><center>2</center></td>
-    <td><center>Ted Harrison School</center></td>
-    <td><center>sarahtran@gmail.com</center></td>
-    <td><center>587-123-4567</center></td>
-    <td><center>Uploaded</center></td>
-    <td><center>Online</center></td>
-    <td><center><button class = "tablebutton">Approve</button></center></td>
-  </tr>
-  <tr>
-    <td><center>Sarah Tran</center></td>
-    <td><center>Amy Tran</center></td>
-    <td><center>2</center></td>
-    <td><center>Ted Harrison School</center></td>
-    <td><center>sarahtran@gmail.com</center></td>
-    <td><center>587-123-4567</center></td>
-    <td><center>Uploaded</center></td>
-    <td><center>Online</center></td>
-    <td><center><button class = "tablebutton">Approve</button></center></td>
-  </tr>
-    <tr>
-    <td><center>Sarah Tran</center></td>
-    <td><center>Amy Tran</center></td>
-    <td><center>2</center></td>
-    <td><center>Ted Harrison School</center></td>
-    <td><center>sarahtran@gmail.com</center></td>
-    <td><center>587-123-4567</center></td>
-    <td><center>Uploaded</center></td>
-    <td><center>Online</center></td>
-    <td><center><button class = "tablebutton">Approve</button></center></td>
-  </tr>
-    <tr>
-    <td><center>Sarah Tran</center></td>
-    <td><center>Amy Tran</center></td>
-    <td><center>2</center></td>
-    <td><center>Ted Harrison School</center></td>
-    <td><center>sarahtran@gmail.com</center></td>
-    <td><center>587-123-4567</center></td>
-    <td><center>Uploaded</center></td>
-    <td><center>Online</center></td>
-    <td><center><button class = "tablebutton">Approve</button></center></td>
-  </tr>
-    <tr>
-    <td><center>Sarah Tran</center></td>
-    <td><center>Amy Tran</center></td>
-    <td><center>2</center></td>
-    <td><center>Ted Harrison School</center></td>
-    <td><center>sarahtran@gmail.com</center></td>
-    <td><center>587-123-4567</center></td>
-    <td><center>Uploaded</center></td>
-    <td><center>Online</center></td>
-    <td><center><button class = "tablebutton">Approve</button></center></td>
-  </tr>
+  {% endfor %}
+
         </tbody>
       </table>
     </div>
-  
+
 </body>
 </html>

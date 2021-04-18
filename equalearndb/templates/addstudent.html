@@ -1,22 +1,24 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
     <title>Equalearn Add a Student Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel = "stylesheet" 
+    <link rel = "stylesheet"
     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel = "stylesheet" href="addstudent.css">
+    <link rel = "stylesheet" href="{% static 'equalearndb/addstudent.css' %}">
 
 </head>
 <body>
     <div>
     <div class="container" id="formd">
-        <img id = "logo" src = "loginequalearnlogo.png" alt = "EquaLearn Logo" style = "float:center; height:72px">
-        <form method="POST">
+        <img id = "logo" src = "{% static 'equalearndb/loginequalearnlogo.png' %}" alt = "EquaLearn Logo" style = "float:center; height:72px">
+        <form action = "{% url 'studentadded' id=client.User_ID %}" method=POST>
+          {%csrf_token%}
             <br>
             <input style="border-color: teal;" type="text" id ="fname" placeholder="Student First Name" name = "fname" required><br>
             <input style="border-color: teal;" type="text" id="lname" placeholder="Student Last Name" name = "lname" required><br>
@@ -32,14 +34,14 @@
                 <option value="live">In Person</option>
                 <option value="both">Both</option>
             </select>
-            <input style="border-color: teal;" type="file" id="transcript" name = "transcript" required><br>
+            <!--<input style="border-color: teal;" type="file" id="transcript" name = "transcript" ><br>-->
             <br>
-            <p1 style="text-align: left;">I recognize that all of this information will be collected under Alberta's Personal Information Protection Act (PIPA). 
+            <p1 style="text-align: left;">I recognize that all of this information will be collected under Alberta's Personal Information Protection Act (PIPA).
             <br>Equalearn can only use said information for the purpose of service and communication.This question is required. </p1>
             <br><input style="border-color: teal;" type="checkbox" id="transcript" name = "transcript" required ><br>
             <br>
             <div>
-                <button type="submit" style="text-align: center;">Sign Up</button>
+                <button style="text-align: center;" type="submit">Sign Up</button>
             </div>
         </form>
     </div>
