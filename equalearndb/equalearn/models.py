@@ -170,8 +170,13 @@ class schedule_student(models.Model):
     end_time = models.TimeField()
 
     def gettimeslot(self):
-        timestr = self.weekday + ": " + datetime.time.strftime(self.start_time, "%I:%m%p") + " - " + datetime.time.strftime(self.end_time, "%I:%m%p")
+        timestr = self.weekday + ": " + datetime.time.strftime(self.start_time, "%I:%M%p") + " - " + datetime.time.strftime(self.end_time, "%I:%M%p")
         return timestr
+
+    def getbasictimeslot(self):
+        basicstr = self.weekday + datetime.time.strftime(self.start_time, "%I:%M%p") + datetime.time.strftime(self.end_time, "%I:%M%p")
+
+
 #class About(models.Model):
 #    session_id = models.ForeignKey(Session, related_name = 'about', on_delete = models.CASCADE)
 #    Subject.subject_name = models.ForeignKey(Subject, related_name = 'about_subjects', on_delete = models.CASCADE)

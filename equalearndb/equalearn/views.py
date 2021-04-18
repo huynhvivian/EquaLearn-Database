@@ -372,3 +372,32 @@ def studentadded(request, id):
             #student.save()
 
     return redirect('editstudents', id=id)
+
+def changeschedule(request, cid, sname):
+    client = Client.objects.get(User_ID = cid)
+    student = Student.objects.get(name = sname, user_id_client = client)
+    studentschedules = schedule_student.objects.filter(student = student)
+    return render(request, 'changestudentschedule.html', {'client': client, 'student': student, 'schedules': studentschedules})
+
+def schedulechanges(request, cid, sname):
+    client = Client.objects.get(User_ID = cid)
+    student = Student.objects.get(name = sname, user_id_client = client)
+    newschedule = request.POST.getlist("schedule")
+    oldschedule = schedule_student.objects.filter(student = student)
+    for schedule in oldschedule:
+        if schedule.getbasictimeslot() not in newschedule:
+            #delete that one
+            schedule.delete()
+    for schedule in newschedule:
+        notnew = True
+        for oschedule in oldschedule:
+            if oschedule.getbasictimeslot() == schedule:
+                notnew = False
+        if notnew:
+            schedule_student.objects.create(
+                student = student,
+                weekday = schedule.split()[0],
+                start_time = datetime.strptime(schedule.split()[1], "%I:%M%p").time(),
+                end_time = datetime.strptime(schedule.split()[2], "%I:%M%p").time()
+            )
+    return redirect('editstudents', id=cid)
