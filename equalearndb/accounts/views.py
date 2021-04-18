@@ -63,6 +63,10 @@ def tutor_app(request, id):
     tutor = EqualearnUser.objects.get(User_ID = id)
     return render(request, 'tutorapplication.html', {'tutor': tutor})
 
+def exec_app(request, id):
+    exec = EqualearnUser.objects.get(User_ID = id)
+    return render(request, 'execapplication.html', {'exec': exec})
+
 def choose_tutor(request, id):
     if request.method == 'POST':
         user = EqualearnUser.objects.get(User_ID = id)
@@ -91,14 +95,20 @@ def choose_exec(request, id):
         user = EqualearnUser.objects.get(User_ID = id)
         user.usertype = "executive"
         user.save()
+
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        phone = request.POST.get("number")
+
         exec = Executive.objects.create(
             User_ID = user.User_ID,
             username = user.username,
             usertype = "executive",
-            name = user.name,
+            # name = user.name,
+            name = fname + " " + lname,
             email = user.email,
-            phone_number = user.phone_number,
-            position = "placeholder"
+            phone_number = phone,
+            position = request.POST.get("position")
         )
     return redirect('login')
 

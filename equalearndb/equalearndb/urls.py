@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^signup/$', accounts_views.signup, name='signup'),
     url(r'client_app/(?P<id>\d+)/$', accounts_views.client_app, name = "client_app"),
     url(r'tutor_app/(?P<id>\d+)/$', accounts_views.tutor_app, name = "tutor_app"),
+    url(r'exec_app/(?P<id>\d+)/$', accounts_views.exec_app, name = "exec_app"),
     url(r'choose_account/(?P<id>\d+)/$', accounts_views.choose_account, name = "choose_account"),
     url(r'choose_tutor/(?P<id>\d+)/$', accounts_views.choose_tutor, name = "choose_tutor"),
     url(r'choose_exec/(?P<id>\d+)/$', accounts_views.choose_exec, name = "choose_exec"),
