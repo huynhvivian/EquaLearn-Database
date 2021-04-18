@@ -29,10 +29,11 @@
 
             <label for="preference">Preference: </label>
 
-            <select name="preference" id="preference">
-                <option value="online">Online</option>
-                <option value="live">In Person</option>
-                <option value="both">Both</option>
+            <select name="preference" id="preference" required>
+                <option value="" disabled selected>Select preference</option>
+                <option value="Online">Online</option>
+                <option value="In-person">In Person</option>
+                <option value="Both">Both</option>
             </select> <br>
             <!-- <label for="transcript" class="transcript">Upload Transcript</label> -->
             <!-- <input style="border-color: teal;" type="file" id="transcript" name = "transcript" required><br> -->

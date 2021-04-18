@@ -3,5 +3,5 @@
 <html>
 <a href = "{% url 'client_app' id=user.User_ID%}"><button>Parent/Guardian</button></a>
 <a href = "{% url 'tutor_app' id=user.User_ID%}"><button>Volunteer</button></a>
-<form action = "{% url 'choose_exec' id=user.User_ID%}" method = "POST">{%csrf_token%}<button type = "submit">Executive</button></form>
+<a href = "{% url 'exec_app' id=user.User_ID%}"><button>Executive</button></a>
 </html>

@@ -42,10 +42,11 @@ def signup(request):
 # def signup(request):
 #     if request.method == 'POST':
 #         username = request.POST.get('username')
+#         email = request.POST.get('email')
 #         raw_password = request.POST.get('password')
 #         user = authenticate(username=username, password=raw_password)
-#         login(request, user)
-#         newuser = EqualearnUser.objects.create(username=username, email=username)
+#         # login(request, user)
+#         newuser = EqualearnUser.objects.create(username=username, email=email)
 #         newuser.save()
 #         return redirect('choose_account', id=newuser.User_ID)
 #     return render(request, 'signup.html')
@@ -61,6 +62,10 @@ def client_app(request, id):
 def tutor_app(request, id):
     tutor = EqualearnUser.objects.get(User_ID = id)
     return render(request, 'tutorapplication.html', {'tutor': tutor})
+
+def exec_app(request, id):
+    exec = EqualearnUser.objects.get(User_ID = id)
+    return render(request, 'execapplication.html', {'exec': exec})
 
 def choose_tutor(request, id):
     if request.method == 'POST':
@@ -90,14 +95,20 @@ def choose_exec(request, id):
         user = EqualearnUser.objects.get(User_ID = id)
         user.usertype = "executive"
         user.save()
+
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        phone = request.POST.get("number")
+
         exec = Executive.objects.create(
             User_ID = user.User_ID,
             username = user.username,
             usertype = "executive",
-            name = user.name,
+            # name = user.name,
+            name = fname + " " + lname,
             email = user.email,
-            phone_number = user.phone_number,
-            position = "placeholder"
+            phone_number = phone,
+            position = request.POST.get("position")
         )
     return redirect('login')
 

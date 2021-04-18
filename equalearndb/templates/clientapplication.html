@@ -22,7 +22,16 @@
             <input style="border-color: teal;" type="text" id ="fname" placeholder="Parent/Guardian First Name" name = "fname" required><br>
             <input style="border-color: teal;" type="text" id="lname" placeholder="Parent/Guardian Last Name" name = "lname" required><br>
             <input style="border-color: teal;" type="tel" id="number" placeholder="Phone Number" name = "number" required><br>
-            <input style="border-color: teal;" type="text" id="org" placeholder="External club/orgnaization (if applicable)" name = "org"><br>
+            <!-- <input style="border-color: teal;" type="text" id="org" placeholder="Organization referred from (if applicable)" name = "org"><br> -->
+
+            <label for="org">Organization referred from (if applicable) </label>
+
+            <select name="org" id="org">
+                <option value="" disabled selected>Select organization</option>
+                <option value="CBFY">CBFY</option>
+                <option value="CIWA">CIWA</option>
+                <option value="CACEP">CACEP</option>
+            </select> <br>
 
             <!-- <label for="lowincomestatus" class="transcript">Upload Low Income Status if not referred</label> -->
             <!-- <input style="border-color: teal;" type="file" id="lowincomestatus" name = "lowincomestatus" required><br> -->
