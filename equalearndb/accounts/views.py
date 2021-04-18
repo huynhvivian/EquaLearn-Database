@@ -27,17 +27,28 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            fname = form.cleaned_data.get('first_name')
-            lname = form.cleaned_data.get('last_name')
-            name = fname + " " + lname
+            # fname = form.cleaned_data.get('first_name')
+            # lname = form.cleaned_data.get('last_name')
+            # name = fname + " " + lname
             email = form.cleaned_data.get('email')
             user = authenticate(username=username, password=raw_password)
             #login(request, user)
-            newuser = EqualearnUser.objects.create(name = name, username = username, email = email, phone_number="x")
+            newuser = EqualearnUser.objects.create(username = username, email = email, phone_number="x")
             return redirect('choose_account', id=newuser.User_ID)
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+# def signup(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         raw_password = request.POST.get('password')
+#         user = authenticate(username=username, password=raw_password)
+#         login(request, user)
+#         newuser = EqualearnUser.objects.create(username=username, email=username)
+#         newuser.save()
+#         return redirect('choose_account', id=newuser.User_ID)
+#     return render(request, 'signup.html')
 
 def choose_account(request, id):
     user = EqualearnUser.objects.get(User_ID = id)
@@ -57,13 +68,18 @@ def choose_tutor(request, id):
         user.usertype = "tutor"
         user.save()
 
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        phone = request.POST.get("number")
+
         tutor = Tutor.objects.create(
          User_ID = user.User_ID,
          username = user.username,
          usertype = "tutor",
-         name = user.name,
+        #  name = user.name,
+         name = fname + " " + lname,
          email = user.email,
-         phone_number = "xxx-xxx-xxxx", #get this in volunteer form or sign-up form please
+         phone_number = phone, 
          preference_online = request.POST.get("preference")
         )
 
@@ -90,13 +106,19 @@ def choose_client(request, id):
         user = EqualearnUser.objects.get(User_ID = id)
         user.usertype = "client"
         user.save()
+
+        fname = request.POST.get("fname")
+        lname = request.POST.get("lname")
+        phone = request.POST.get("number")
+
         exec = Client.objects.create(
             User_ID = user.User_ID,
             username = user.username,
             usertype = "client",
-            name = user.name,
+            # name = user.name,
+            name = fname + " " + lname,
             email = user.email,
-            phone_number = request.POST.get("number"),
+            phone_number = phone,
             referred_organization = request.POST.get("org"),
             proof_of_low_income = True
         )

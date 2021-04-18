@@ -1,4 +1,4 @@
-<!-- {% block content %}
+{% block content %}
   <h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
@@ -16,11 +16,11 @@
     {% endfor %}
     <button type="submit">Sign up</button>
   </form>
-{% endblock %} -->
+{% endblock %}
 
 
-<!DOCTYPE html>
-{% load static %}
+<!-- <!DOCTYPE html> -->
+<!-- {% load static %}
 <html lang="en">
 
 <head>
@@ -36,8 +36,8 @@
         <img id = "logo" src = "{% static 'equalearndb/loginequalearnlogo.png' %}" alt = "EquaLearn Logo" style = "float:center; height:72px">
         <form method="POST" action="{% url 'signup' %}"> {% csrf_token %}
             <br>
-            <input style="border-color: teal;" type="email" id ="email_u" placeholder="User Email" name = "email_u" required><br>
-            <input style="border-color: teal;" type="password" placeholder="Password" name = "psw" required><br>
+            <input style="border-color: teal;" type="email" id ="email_u" placeholder="User Email" name = "username" required><br>
+            <input style="border-color: teal;" type="password" placeholder="Password" name = "password" required><br>
             <div class="container">
                 <span class="choose">Choose User Type</span>
                 <select name = "usertype">
@@ -56,4 +56,4 @@
         </form>
     </div>
     </div>
-</body>
+</body> -->

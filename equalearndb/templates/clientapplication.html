@@ -19,9 +19,8 @@
         <img id = "logo" src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" style = "float:center; height:72px">
         <form action = "{% url 'choose_client' id=client.User_ID %}"method="POST">{% csrf_token %}
             <br>
-            <input style="border-color: teal;" type="text" id ="fullname" placeholder="Parent/Guardian Full Name" name = "fullname" required><br>
-            <!-- <input style="border-color: teal;" type="text" id ="fname" placeholder="Parent/Guardian First Name" name = "fname" required><br> -->
-            <!-- <input style="border-color: teal;" type="text" id="lname" placeholder="Parent/Guardian Last Name" name = "lname" required><br> -->
+            <input style="border-color: teal;" type="text" id ="fname" placeholder="Parent/Guardian First Name" name = "fname" required><br>
+            <input style="border-color: teal;" type="text" id="lname" placeholder="Parent/Guardian Last Name" name = "lname" required><br>
             <input style="border-color: teal;" type="tel" id="number" placeholder="Phone Number" name = "number" required><br>
             <input style="border-color: teal;" type="text" id="org" placeholder="External club/orgnaization (if applicable)" name = "org"><br>
 
