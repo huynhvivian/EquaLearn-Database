@@ -22,7 +22,7 @@ from accounts import views as accounts_views
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('', include('django.contrib.auth.urls')), 
+    path('', include('django.contrib.auth.urls')), # includes /login and /logout
 
     # log in, log out, applications
 

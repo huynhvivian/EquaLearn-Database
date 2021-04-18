@@ -13,8 +13,7 @@
     <div>
     <div class="container" id="formd">
         <img id = "logo" src = "{% static 'equalearndb/loginequalearnlogo.png' %}" alt = "EquaLearn Logo" style = "float:center; height:72px">
-        <form method="POST">
-          {% csrf_token %}
+        <form method="POST" action="{% url 'signup' %}"> {% csrf_token %}
             <br>
             <input style="border-color: teal;" type="email" id ="email_u" placeholder="User Email" name = "email_u" required><br>
             <input style="border-color: teal;" type="password" placeholder="Password" name = "psw" required><br>

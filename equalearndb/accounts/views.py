@@ -6,6 +6,23 @@ from equalearn.models import Tutor
 from equalearn.models import Client
 from equalearn.models import Executive
 
+def login_page(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # the code below doesn't work :(
+        if user.__class__.__name__ == 'Executive':
+            return redirect('execdashboard.html', id=user.User_ID)
+        if user.__class__.__name__ == 'Tutor':
+            return redirect('tutordashboard.html', id=user.User_ID)
+        if user.__class__.__name__ == 'Client':
+            return redirect('clientdashboard.html', id=user.User_ID)
+    else:
+        # Return an 'invalid login' error message.
+        ...
+
 def pagelogout(request):
     if request.method == "POST":
         logout(request)
@@ -13,22 +30,13 @@ def pagelogout(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            fname = form.cleaned_data.get('first_name')
-            lname = form.cleaned_data.get('last_name')
-            name = fname + " " + lname
-            email = form.cleaned_data.get('email')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            newuser = EqualearnUser.objects.create(name = name, email = email, phone_number="x")
-            return redirect('choose_account', id=newuser.User_ID)
-    else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+        username = request.POST.get('username')
+        raw_password = request.POST.get('password')
+        user = authenticate(username=username, password=raw_password)
+        login(request, user)
+        newuser = EqualearnUser.objects.create()
+        return redirect('choose_account', id=newuser.User_ID)
+    return render(request, 'signup.html')
 
 def choose_account(request, id):
     user = EqualearnUser.objects.get(User_ID = id)
@@ -52,7 +60,7 @@ def choose_tutor(request, id):
         tutor.club = request.POST.get('club')
 
         tutor.preference_online = request.POST.get("preference"),
-        tutor.email = user.email
+        # tutor.email = user.email
 
         tutor.save()
         

@@ -18,12 +18,11 @@
     <div>
     <div class="container" id="formd">
         <img id = "logo" src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" style = "float:center; height:72px">
-        <form method="POST"> {% csrf_token %}
+        <form method="POST" action="{% url 'login' %}"> {% csrf_token %}
             <br>
             <!--# change username to email later --> 
-            {{ form.as_p }}
-            <!-- <input style="border-color: teal;" type="username" id ="username" placeholder="Username" name = "username" required><br>
-            <input style="border-color: teal;" type="password" placeholder="Password" name = "psw" required><br> -->
+            <input style="border-color: teal;" type="username" id ="username" placeholder="Username" name = "username" required><br>
+            <input style="border-color: teal;" type="password" placeholder="Password" name = "password" required><br> 
             <div>
                 <button type="submit" style="text-align: center;">Login</button>
             </div>
