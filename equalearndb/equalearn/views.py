@@ -699,7 +699,8 @@ def editsubject(request, id, name):
     client = Client.objects.get(User_ID = id)
 #    for take in takes:
 #        client = take.student_name.user_id_client
-    return render(request, 'editsubject.html', {'takes': takes, 'client': client})
+    student = Student.objects.get(user_id_client = id, name = name)
+    return render(request, 'editsubject.html', {'takes': takes, 'client': client, 'student': student})
 
 def client_edit_session(request, uid, sid):
     client = Client.objects.get(User_ID = uid)
