@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <title>Equalearn Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" href="{% static 'equalearndb/signup.css' %}">
+
+</head>
+<body>
+  <div>
+  <div class="container" id="formd">
+      <img id = "logo" src = "{% static 'equalearndb/loginequalearnlogo.png' %}" alt = "EquaLearn Logo" style = "float:center; height:72px">
+ 
 {% block content %}
   <h2>Sign up</h2>
   <form method="post">
@@ -5,7 +21,7 @@
     {% for field in form %}
       <p>
         {{ field.label_tag }}<br>
-        {{ field }}
+        {{ field }}<br>
         {% if field.help_text %}
           <small style="color: grey">{{ field.help_text }}</small>
         {% endif %}
@@ -17,6 +33,9 @@
     <button type="submit">Sign up</button>
   </form>
 {% endblock %}
+  </div>
+  </div>
+</body>
 
 
 <!-- <!DOCTYPE html>
