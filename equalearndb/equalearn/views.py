@@ -648,8 +648,8 @@ def sessions_signed_up(request, tid, takeid):
     startstr = time.split()[1]
     endstr = time.split()[3]
 
-    start = datetime.strptime(startstr, "%I:%m%p").time()
-    end = datetime.strptime(endstr, "%I:%m%p").time()
+    start = datetime.strptime(startstr, "%I:%M%p").time()
+    end = datetime.strptime(endstr, "%I:%M%p").time()
 
     #create pendingsession object
     PendingSession.objects.create(
