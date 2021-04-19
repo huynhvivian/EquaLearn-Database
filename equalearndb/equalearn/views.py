@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
 from rest_framework import viewsets
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 import django.contrib.staticfiles
 import random
 import calendar
@@ -37,59 +42,459 @@ from .serializers import PendingSessionSerializer
 
 
 
-# Create your views here.
+# First: API views
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('name')
-    serializer_class = UserSerializer
 
-class ExecutiveViewSet(viewsets.ModelViewSet):
-    queryset = Executive.objects.all().order_by('name')
-    serializer_class = ExecutiveSerializer
+@api_view(['GET', 'POST'])
+def user_list(request):
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
 
-class TutorViewSet(viewsets.ModelViewSet):
-    queryset = Tutor.objects.all().order_by('name')
-    serializer_class = TutorSerializer
+    elif request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ClientViewSet(viewsets.ModelViewSet):
-    queryset = Client.objects.all().order_by('name')
-    serializer_class = ClientSerializer
+@api_view(['GET', 'PUT', 'DELETE'])
+def user_detail(request, pk):
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
-class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.all().order_by('name')
-    serializer_class = StudentSerializer
+    if request.method == 'GET':
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
-class SubjectViewSet(viewsets.ModelViewSet):
-    queryset = Subject.objects.all().order_by('course_name')
-    serializer_class = SubjectSerializer
+    elif request.method == 'PUT':
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class LocationViewSet(viewsets.ModelViewSet):
-    queryset = Location.objects.all().order_by('library_name')
-    serializer_class = LocationSerializer
+    elif request.method == 'DELETE':
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-class SessionViewSet(viewsets.ModelViewSet):
-    queryset = Session.objects.all().order_by('session_id')
-    serializer_class = SessionSerializer
+#Executives
+@api_view(['GET', 'POST'])
+def executive_list(request):
+    if request.method == 'GET':
+        execs = Executive.objects.all()
+        serializer = ExecutiveSerializer(execs, many=True)
+        return Response(serializer.data)
 
-class PendingSessionViewSet(viewsets.ModelViewSet):
-    queryset = PendingSession.objects.all().order_by('sessions_id')
-    serializer_class = PendingSessionSerializer
+    elif request.method == 'POST':
+        serializer = ExecutiveSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class TakesViewSet(viewsets.ModelViewSet):
-    queryset = Takes.objects.all()
-    serializer_class = TakesSerializer
+@api_view(['GET', 'PUT', 'DELETE'])
+def executive_detail(request, pk):
+    try:
+        exec = Executive.objects.get(pk=pk)
+    except Executive.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
-class TeachesViewSet(viewsets.ModelViewSet):
-    queryset = Takes.objects.all()
-    serializer_class = TeachesSerializer
+    if request.method == 'GET':
+        serializer = ExecutiveSerializer(exec)
+        return Response(serializer.data)
 
-class PreferredStudentViewSet(viewsets.ModelViewSet):
-    queryset = preferred_student.objects.all()
-    serializer_class = PreferredStudentSerializer
+    elif request.method == 'PUT':
+        serializer = ExecutiveSerializer(exec, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ScheduleStudentViewSet(viewsets.ModelViewSet):
-    queryset = schedule_student.objects.all()
-    serializer_class = ScheduleStudentSerializer
+    elif request.method == 'DELETE':
+        exec.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#Tutors
+
+@api_view(['GET', 'POST'])
+def tutor_list(request):
+    if request.method == 'GET':
+        tutors = Tutor.objects.all()
+        serializer = UserSerializer(tutors, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = TutorSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def tutor_detail(request, pk):
+    try:
+        tutor = Tutor.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = TutorSerializer(tutor)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = TutorSerializer(tutor, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        tutor.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#Clients
+@api_view(['GET', 'POST'])
+def client_list(request):
+    if request.method == 'GET':
+        clients = Client.objects.all()
+        serializer = ClientSerializer(clients, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = ClientSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def client_detail(request, pk):
+    try:
+        client = Client.objects.get(pk=pk)
+    except Client.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ClientSerializer(client)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ClientSerializer(client, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        client.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#Students
+@api_view(['GET', 'POST'])
+def student_list(request):
+    if request.method == 'GET':
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def student_detail(request, pk):
+    try:
+        student = Student.objects.get(pk=pk)
+    except Student.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = StudentSerializer(student)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = StudentSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#Subjects
+
+@api_view(['GET', 'POST'])
+def subject_list(request):
+    if request.method == 'GET':
+        subjects = Subject.objects.all()
+        serializer = SubjectSerializer(subjects, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = SubjectSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def subject_detail(request, pk):
+    try:
+        subject = Subject.objects.get(pk=pk)
+    except Subject.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = SubjectSerializer(subject)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = SubjectSerializer(subject, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        subject.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#Locations
+
+@api_view(['GET', 'POST'])
+def location_list(request):
+    if request.method == 'GET':
+        locations = Location.objects.all()
+        serializer = LocationSerializer(locations, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = LocationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def location_detail(request, pk):
+    try:
+        location = Location.objects.get(pk=pk)
+    except Location.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = LocationSerializer(location)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = LocationSerializer(location, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        location.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#Sessions
+@api_view(['GET', 'POST'])
+def session_list(request):
+    if request.method == 'GET':
+        sessions = Session.objects.all()
+        serializer = SessionSerializer(sessions, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = SessionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def session_detail(request, pk):
+    try:
+        session = Session.objects.get(pk=pk)
+    except Session.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = SessionSerializer(session)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = SessionSerializer(session, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        session.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#Pending Sessions
+@api_view(['GET', 'POST'])
+def pendingsession_list(request):
+    if request.method == 'GET':
+        psessions = PendingSession.objects.all()
+        serializer = PendingSessionSerializer(psessions, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = PendingSessionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def pendingsession_detail(request, pk):
+    try:
+        psession = PendingSession.objects.get(pk=pk)
+    except PendingSession.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = PendingSessionSerializer(psession)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = PendingSessionSerializer(psession, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        psession.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#Takes
+@api_view(['GET', 'POST'])
+def takes_list(request):
+    if request.method == 'GET':
+        takes = Takes.objects.all()
+        serializer = TakesSerializer(takes, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = TakesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def takes_detail(request, pk):
+    try:
+        take = Takes.objects.get(pk=pk)
+    except Takes.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = TakesSerializer(take)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = TakesSerializer(take, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        take.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+#Preferred_Student
+
+@api_view(['GET', 'POST'])
+def preferredstudent_list(request):
+    if request.method == 'GET':
+        pstudents = preferred_student.objects.all()
+        serializer = PreferredStudentSerializer(pstudents, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = PreferredStudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def preferredstudent_detail(request, pk):
+    try:
+        pstudent = preferred_student.objects.get(pk=pk)
+    except preferred_student.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = PreferredStudentSerializer(pstudent)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = PreferredStudentSerializer(pstudent, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        pstudent.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+#ScheduleStudent
+@api_view(['GET', 'POST'])
+def schedulestudent_list(request):
+    if request.method == 'GET':
+        schedules = schedule_student.objects.all()
+        serializer = ScheduleStudentSerializer(schedules, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = ScheduleStudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def schedulestudent_detail(request, pk):
+    try:
+        schedule = schedule_student.objects.get(pk=pk)
+    except schedule_student.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ScheduleStudentSerializer(schedule)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ScheduleStudentSerializer(schedule, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        schedule.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 
 def executive_dashboard(request, id):
     #id = exec's user ID
