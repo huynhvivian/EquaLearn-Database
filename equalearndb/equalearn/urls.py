@@ -40,6 +40,8 @@ urlpatterns = [
     path('pendingsessions/<int:pk>/', views.pendingsession_detail),
     path('takes/', views.takes_list),
     path('takes/<int:pk>/', views.takes_detail),
+    path('teaches/', views.teaches_list),
+    path('teaches/<int:pk>/', views.teaches_detail),
     path('preferredstudents/', views.preferredstudent_list),
     path('preferredstudents/<int:pk>/', views.preferredstudent_detail),
     path('schedulestudents/', views.schedulestudent_list),

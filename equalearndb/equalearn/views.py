@@ -418,6 +418,42 @@ def takes_detail(request, pk):
         take.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+#Teaches
+@api_view(['GET', 'POST'])
+def teaches_list(request):
+    if request.method == 'GET':
+        teaches = Teaches.objects.all()
+        serializer = TeachesSerializer(teaches, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = TeachesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def teaches_detail(request, pk):
+    try:
+        teach = Teaches.objects.get(pk=pk)
+    except Teaches.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = TeachesSerializer(teach)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = TeachesSerializer(teach, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        teach.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 #Preferred_Student
 
