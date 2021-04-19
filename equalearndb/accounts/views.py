@@ -18,7 +18,7 @@ def login_page(request):
 def pagelogout(request):
     if request.method == "POST":
         logout(request)
-        return redirect('home')
+        return redirect('login/')
 
 def signup(request):
     if request.method == 'POST':
