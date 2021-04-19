@@ -48,7 +48,7 @@
           <td> {{session.location}} </td>
           <td> {{session.getcoursename}} {{session.getcourselevel}} </td>
           <td> {{session.status}} </td>
-          <td> <button class = "tablebutton">Edit/Cancel</button> </td>
+          <td> <a href = "{% url 'client_edit_session' uid=client.User_ID sid=session.session_id%}"><button class = "tablebutton">Edit/Cancel</button> </td>
         </tr>
       {% endfor %}
     </tbody>

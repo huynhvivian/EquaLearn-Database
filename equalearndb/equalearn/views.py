@@ -743,9 +743,9 @@ def submit_edited_sessions(request, tid, sid):
 
         session.save()
 
-    return redirect('volunteer_dashboard', id=tid)
+    return redirect('volunteer_dashboard', id=tcid)
 
-def client_submit_edited_sessions(request, tid, sid):
+def client_submit_edited_sessions(request, cid, sid):
     session = Session.objects.get(session_id = sid)
     if request.method == 'POST':
         newdate = request.POST.get('newdate', session.date)
@@ -774,22 +774,22 @@ def client_submit_edited_sessions(request, tid, sid):
 
         session.save()
 
-    return redirect('client_dashboard', id=tid)
+    return redirect('client_dashboard', id=cid)
 
-def cancel_session(request, tid, sid):
+def cancel_session(request, cid, sid):
     session = Session.objects.get(session_id = sid)
     if request.method == 'POST':
         session.status = "Cancelled"
         session.save()
-    return redirect('volunteer_dashboard', id=tid)
+    return redirect('client_dashboard', id=cid)
 
 
-def client_cancel_session(request, tid, sid):
+def client_cancel_session(request, cid, sid):
     session = Session.objects.get(session_id = sid)
     if request.method == 'POST':
         session.status = "Cancelled"
         session.save()
-    return redirect('client_dashboard', id=tid)
+    return redirect('client_dashboard', id=cid)
 
 def addstudent(request, id):
     client = Client.objects.get(User_ID = id)

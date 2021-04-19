@@ -48,9 +48,9 @@ urlpatterns = [
     url(r'session_signups/(?P<id>\d+)/$', views.session_signups, name = "session_signups"),
 
     url(r'client_edit_session/(?P<uid>\d+)/(?P<sid>\d+)/$', views.client_edit_session, name = "client_edit_session"),
-    url(r'client_confirm_session/(?P<tid>\d+)/(?P<sid>\d+)/$', views.client_submit_edited_sessions, name = "client_confirm_session"),
+    url(r'client_confirm_session/(?P<cid>\d+)/(?P<sid>\d+)/$', views.client_submit_edited_sessions, name = "client_confirm_session"),
 
-    url(r'client_cancel_session/(?P<tid>\d+)/(?P<sid>\d+)/$', views.client_cancel_session, name = "client_cancel_session"),
+    url(r'client_cancel_session/(?P<cid>\d+)/(?P<sid>\d+)/$', views.client_cancel_session, name = "client_cancel_session"),
 
     url(r'edit_session/(?P<uid>\d+)/(?P<sid>\d+)/$', views.edit_sessions, name = "edit_session"),
     url(r'confirm_session/(?P<tid>\d+)/(?P<sid>\d+)/$', views.submit_edited_sessions, name = "confirm_session"),
