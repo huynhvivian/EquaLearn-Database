@@ -39,7 +39,7 @@ urlpatterns = [
 
     # edit profile links
     url(r'edit_profile/(?P<id>\d+)/$', accounts_views.edit_profile, name="edit_profile"),
-    url(r'edit_profile_exec/(?P<id>\d+)/$', accounts_views.edit_profile_exec, name="edit_exec_profile"),
+    url(r'edit_profile_exec/(?P<id>\d+)/$', accounts_views.edit_profile_exec, name="edit_profile_exec"),
 
     # volunteer links
     url(r'approve_volunteers/(?P<id>\d+)/$', views.approve_volunteers, name = "approve_volunteers"),

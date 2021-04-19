@@ -34,7 +34,7 @@
 <div class="rectangle"></div>
 
 <!-- BUTTONS -->
-<button class = "editprofilebutton" style = "button;">Edit Profile</button>
+<a href = "{% url 'edit_profile_exec' id=executive.User_ID %}"><button class = "editprofilebutton" style = "button;">Edit Profile</button></a>
 <a href = "{% url 'view_pending_clients' id=executive.User_ID %}"><button class="btn"><i class="fa fa-check"></i> Approve client applications</button></a>
 <a href = "{% url 'approve_volunteers' id=executive.User_ID %}"><button class="btn"><i class="fa fa-check"></i> Approve volunteer applications</button></a>
 <a href = "{% url 'approve_hours' eid=executive.User_ID%}"><button class="btn"><i class="fa fa-check"></i> Approve volunteer hours</button></a>

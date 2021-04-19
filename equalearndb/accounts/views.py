@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from accounts.forms import SignUpForm
+from accounts.forms import SignUpForm, ExecProfileForm
 from equalearn.models import User as EqualearnUser
 from equalearn.models import Tutor
 from equalearn.models import Client
@@ -138,8 +138,8 @@ def choose_client(request, id):
 def getusername(request):
     return HttpResponseRedirect(reverse('home', args=[request.user.username]))
 
-def edit_profile(request, username):
-    user = EqualearnUser.objects.get(username = username)
+def edit_profile(request, id):
+    user = EqualearnUser.objects.get(User_ID = id) # might have to be username
     type = user.usertype
     if (type == "executive"):
         return redirect('edit_profile_exec', id=user.User_ID)
@@ -152,6 +152,15 @@ def edit_profile(request, username):
 
 def edit_profile_exec(request, id):
     exec = Executive.objects.get(User_ID = id)
+    if request.method == 'POST':
+        user_profile = Executive.objects.get(user=request.user)
+        form = ExecProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            user_profile = Executive.objects.get(user=user_profile)
+    if request.method == 'GET':
+        user_profile = Executive.objects.get(user=request.user)
+        form = ExecProfileForm(instance=user_profile)
     return render(request, 'editprofileexec.html', {'executive': exec})
 
 def home(request, username):
