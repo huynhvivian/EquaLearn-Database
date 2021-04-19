@@ -15,7 +15,7 @@
 </style>
 </head>
 
-<button class = "logoutbutton">Log Out</button>
+<a href = "{% url 'logout'%}"><button class = "logoutbutton">Log Out</button></a>
 
 <img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
 
@@ -25,7 +25,7 @@
 
 <!-- BUTTONS -->
 <a href = "{% url 'executive_dashboard' id=executive.User_ID %}"><button class = "button1" style = "button;">Back</button></a>
-<button class = "editprofilebutton" style = "button;">Edit Profile</button>
+<!-- <button class = "editprofilebutton" style = "button;">Edit Profile</button> -->
 
 <!-- TABLE -->
     <div class="tableFixHead">

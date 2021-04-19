@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 {% load static %}
-<html>
-<a href = "{% url 'client_app' id=user.User_ID%}"><button>Parent/Guardian</button></a>
-<a href = "{% url 'tutor_app' id=user.User_ID%}"><button>Volunteer</button></a>
-<a href = "{% url 'exec_app' id=user.User_ID%}"><button>Executive</button></a>
+
+<html lang="en">
+
+<head>
+    <title>Equalearn Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = "stylesheet" href="{% static 'equalearndb/signup.css' %}">
+
+</head>
+<body>
+    <div>
+    <div class="container" id="formd">
+        <img id = "logo" src = "{% static 'equalearndb/loginequalearnlogo.png' %}" alt = "EquaLearn Logo" style = "float:center; height:72px">
+        <br>
+        <br>
+        <p><a href = "{% url 'client_app' id=user.User_ID%}"><button type="submit" style="text-align: center;">Parent/Guardian</button></a></p>
+        <p><a href = "{% url 'tutor_app' id=user.User_ID%}"><button type="submit" style="text-align: center;">Volunteer</button></a></p>
+        <p><a href = "{% url 'exec_app' id=user.User_ID%}"><button type="submit" style="text-align: center;">Executive</button></a></p>
+    </div>
+    </div>
+</body>
 </html>
