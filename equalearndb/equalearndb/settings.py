@@ -129,3 +129,4 @@ VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 
 LOGIN_REDIRECT_URL = '/getusername/' # should go to home page
+LOGOUT_REDIRECT_URL = '/login/' # goas back to login page
