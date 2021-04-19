@@ -24,14 +24,19 @@
             <input style="border-color: teal;" type="tel" id="number" placeholder="Phone Number" name = "number" required><br>
             <!-- <input style="border-color: teal;" type="text" id="org" placeholder="Organization referred from (if applicable)" name = "org"><br> -->
 
-            <label for="org">Organization referred from (if applicable) </label>
+            <label for="org">Organization referred from: </label>
 
-            <select name="org" id="org">
+            <select name="org" id="org" required>
                 <option value="" disabled selected>Select organization</option>
+                <option value="none">none</option>
                 <option value="CBFY">CBFY</option>
                 <option value="CIWA">CIWA</option>
                 <option value="CACEP">CACEP</option>
             </select> <br>
+
+            <p1 style="text-align: left;">If I was not referred from an organization (I selected "none" above),
+            <br> I have emailed all my low income documentation to equalearninfo@gmail.com </p1>
+            <br><input style="border-color: teal;" type="checkbox" id="lowincomestatus" name = "lowincomestatus" ><br>
 
             <!-- <label for="lowincomestatus" class="transcript">Upload Low Income Status if not referred</label> -->
             <!-- <input style="border-color: teal;" type="file" id="lowincomestatus" name = "lowincomestatus" required><br> -->

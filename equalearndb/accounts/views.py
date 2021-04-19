@@ -121,6 +121,11 @@ def choose_client(request, id):
         fname = request.POST.get("fname")
         lname = request.POST.get("lname")
         phone = request.POST.get("number")
+        box_checked = request.POST.get('lowincomestatus')
+        if box_checked:
+            proof_of_low_income = True
+        else:
+            proof_of_low_income = False
 
         exec = Client.objects.create(
             User_ID = user.User_ID,
@@ -131,7 +136,7 @@ def choose_client(request, id):
             email = user.email,
             phone_number = phone,
             referred_organization = request.POST.get("org"),
-            proof_of_low_income = True
+            proof_of_low_income = proof_of_low_income
         )
     return redirect('login')
 
