@@ -69,5 +69,8 @@ urlpatterns = [
     url(r'editsubject/(?P<id>\d+)/(?P<name>[\w\s]+)/$', views.editsubject, name = "editsubject"),
 
     url(r'choosesubject/(?P<id>\d+)/(?P<name>[\w\s]+)/$', views.choosesubject, name = "choosesubject"),
+
+    url(r'changeschedule/(?P<cid>\d+)/(?P<sname>[\w\s]+)/$', views.changeschedule, name = "changeschedule"),
+    url(r'schedulechanges/(?P<cid>\d+)/(?P<sname>[\w\s]+)/$', views.schedulechanges, name = "schedulechanges"),
     path('', include('equalearn.urls'))
 ]
