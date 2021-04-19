@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<form action= "{% url 'client_confirm_session' cid=client.User_ID sid=session.session_id %}" method = POST>
+Session ID = {{session.session_id}}
+Change Date:
+<input type = "date" value = {{session.date}} name = 'newdate'>
+
+Change Time:
+Start:<input type = "time" name = 'newstart' min = "9:00" max = "20:00">
+End:<input type = "time" name = 'newend' min = "9:00" max = "20:00">
+
+Change Location:
+<select name = 'changedloc'>
+  {% for location in locations %}
+  <option> {{location.library_name}} </option>
+  {% endfor %}
+</select>
+
+{% csrf_token %}<button type = "submit">Confirm</button></form>
+<form action = "{% url 'client_cancel_session' cid=client.User_ID sid=session.session_id%}" method = POST>{% csrf_token %}<button>Cancel Session</button></form>
+<a href = "{% url 'client_dashboard' id=client.User_ID%}"><button>Cancel Changes</button></a>
+</html>
