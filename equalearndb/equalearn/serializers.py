@@ -13,69 +13,69 @@ from .models import schedule_student
 from .models import preferred_student
 from .models import PendingSession
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('User_ID', 'name', 'email', 'phone_number')
+        fields = "__all__"
 
 
-class ExecutiveSerializer(serializers.HyperlinkedModelSerializer):
+class ExecutiveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Executive
-        fields = ('User_ID', 'name', 'email', 'phone_number', 'position')
+        fields = "__all__"
 
 
-class ClientSerializer(serializers.HyperlinkedModelSerializer):
+class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
-        fields = ('User_ID', 'name', 'email', 'phone_number', 'referred_organization', 'proof_of_low_income', 'accepted')
+        fields = "__all__"
 
-class TutorSerializer(serializers.HyperlinkedModelSerializer):
+class TutorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tutor
-        fields = ('User_ID', 'name', 'email', 'phone_number', 'date_started', 'preference_online', 'accepted', 'grade', 'club')
+        fields = "__all__"
 
-class StudentSerializer(serializers.HyperlinkedModelSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ('student_id', 'user_id_client', 'name', 'school')
+        fields = "__all__"
 
-class SubjectSerializer(serializers.HyperlinkedModelSerializer):
+class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subject
-        fields = "('subject_id', 'course_name', 'grade_level')"
+        fields = "__all__"
 
-class LocationSerializer(serializers.HyperlinkedModelSerializer):
+class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
         fields = "__all__"
 
-class SessionSerializer(serializers.HyperlinkedModelSerializer):
+class SessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Session
         fields = "__all__"
 
-class TakesSerializer(serializers.HyperlinkedModelSerializer):
+class TakesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Takes
         fields = "__all__"
 
-class TeachesSerializer(serializers.HyperlinkedModelSerializer):
+class TeachesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teaches
         fields = "__all__"
 
-class PendingSessionSerializer(serializers.HyperlinkedModelSerializer):
+class PendingSessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = PendingSession
         fields = "__all__"
 
-class PreferredStudentSerializer(serializers.HyperlinkedModelSerializer):
+class PreferredStudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = preferred_student
         fields = "__all__"
 
-class ScheduleStudentSerializer(serializers.HyperlinkedModelSerializer):
+class ScheduleStudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = schedule_student
         fields = "__all__"
