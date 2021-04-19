@@ -13,12 +13,12 @@
 
 <img src = "https://i.imgur.com/Z9fdh0a.png" alt = "EquaLearn Logo" height = "50" style = "float:left">
 
-<h1> Edit Subjects</h1>
+<h1> Edit Subjects - {{student.name}}</h1>
 <div class="rectangle"></div>
 
 <!-- BUTTONS -->
 <a href = "{% url 'editstudents' id=client.User_ID%}"><button class = "button1">Back to All Students</button></a>
-<!--<a href = "{#% url 'choosesubject' id=client.User_ID name=takes.getstudentname%}"><button class = "editprofilebutton">Add Student</button></a>-->
+<a href = "{% url 'choosesubject' id=client.User_ID name=student.name%}"><button class = "editprofilebutton">Add Student</button></a>
 
 
 <!-- TABLE -->
